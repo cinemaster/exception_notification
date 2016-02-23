@@ -13,6 +13,7 @@ module ExceptionNotifier
         opts              = {
                               :api_version => options.delete(:api_version) || 'v1'
                             }
+        opts[:http_proxy] = options.delete(:http_proxy) unless options.delete(:http_proxy).nil?
         @from             = options.delete(:from) || 'Exception'
         @room             = HipChat::Client.new(api_token, opts)[room_name]
         @message_template = options.delete(:message_template) || ->(exception) {
